@@ -69,7 +69,7 @@ Geen markdown, geen uitleg buiten het JSON-object.`;
     }
 
     const data = await response.json();
-    const text = data.content.filter(b => b.type === 'text').map(b => b.text).join('');
+    const text = (data?.content || []).filter(b => b.type === 'text').map(b => b.text).join('') || JSON.stringify(data);
     return res.status(200).json({ text });
 
   } catch (err) {
